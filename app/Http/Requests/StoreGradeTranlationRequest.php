@@ -22,7 +22,10 @@ class StoreGradeTranlationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'title'=>'required|string',
+            'name_ar' => 'required|string',
+            'notes_ar' => 'nullable|string',
+            'name_en' => 'required|string',
+            'notes_en' => 'nullable|string',
         ];
     }
        public function attributes()
