@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreGradeRequest extends FormRequest
+class UpdateGradeTranslateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,17 +22,13 @@ class StoreGradeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'notes' => 'nullable|string',
-            // 'name_en' => 'required|string',
-            // 'notes_en' => 'nullable|string',
+            // 'title'=>'required|string',
         ];
     }
        public function attributes()
     {
         return[
-           'name'=>__('keywords.gradename'),
-           'notes'=>__('keywords.notes'),
+           //'title'=>__('keywords.title'),
         ];
     }
 }

@@ -17,17 +17,17 @@
 
 
 
-                <li class="nav-item nav-category">{{__('keywords.gradeList')}}</li>
+                <li class="nav-item nav-category">{{__('keywords.grade_list')}}</li>
                 <li class="nav-item">
                   <a class="nav-link" data-bs-toggle="collapse" href="#emails" role="button" aria-expanded="false" aria-controls="emails">
                     <i class="link-icon" data-feather="mail"></i>
-                    <span class="link-title">{{__('keywords.grade')}}</span>
+                    <span class="link-title">{{__('keywords.grade_list')}}</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                   </a>
                   <div class="collapse" id="emails">
                     <ul class="nav sub-menu">
                       <li class="nav-item">
-                        <a href="{{ route('admin.grades.index') }}" class="nav-link">{{__('keywords.addgrade')}}</a>
+                        <a href="{{ route('admin.grades.index') }}" class="nav-link">{{__('keywords.add_new_grade')}}</a>
                       </li>
                    
                     </ul>
