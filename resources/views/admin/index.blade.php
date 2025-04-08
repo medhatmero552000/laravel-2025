@@ -1,6 +1,8 @@
 @extends('admin.master')
 @section('title',  __('keywords.dashboard') )
+@section('pagetitle',  __('keywords.dashboard') )
 @section('content')
+
 
 <div class="page-content">
 

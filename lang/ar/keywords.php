@@ -146,4 +146,32 @@ return [
     'billing_statements' => 'بيانات الفواتير',
     'payment_gateway' => 'بوابة الدفع',
     'subscription_plans' => 'خطط الاشتراك',
+
+    /* --------------------------------- Grades --------------------------------- */
+    'gradeList' => 'قائمة المراحل الدراسية',
+    'grade' =>'المرحلة الدراسية',
+    'addgrade' =>'اضافة مرحلة دراسية',
+    'addnewgrade' =>' اضافة مرحلة دراسية جديدة',
+    
+    'school_management' => 'إدارة المدارس',
+    'school_list' => 'قائمة المدارس',
+    'add_school' => 'إضافة مدرسة',
+    'edit_school' => 'تعديل مدرسة',
+    'delete_school' => 'حذف مدرسة',
+    'school_name' => 'اسم المدرسة',
+    'school_address' => 'عنوان المدرسة',
+    'school_contact' => 'بيانات الاتصال بالمدرسة',
+    'school_profile' => 'الملف الشخصي للمدرسة',
+    'students' => 'الطلاب',
+    'teacher_list' => 'قائمة المعلمين',
+    'student_list' => 'قائمة الطلاب',
+    'add_student' => 'إضافة طالب',
+    'add_teacher' => 'إضافة معلم',
+    'edit_student' => 'تعديل طالب',
+    'edit_teacher' => 'تعديل معلم',
+    'school_settings' => 'إعدادات المدرسة',
+    'gradename' => 'إسم المرحلة',
+    'notes' => 'الملاحظات',
+
+
 ];

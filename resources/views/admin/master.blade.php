@@ -23,8 +23,9 @@
             <div class="page-content">
 
                 <div class="flex-wrap d-flex justify-content-between align-items-center grid-margin">
+                 
                     <div>
-                        <h4 class="mb-3 mb-md-0">Welcome to Dashboard</h4>
+                        <h4 class="mb-3 mb-md-0">@yield('pagetitle')</h4>
                     </div>
                     <div class="flex-wrap d-flex align-items-center text-nowrap">
 
