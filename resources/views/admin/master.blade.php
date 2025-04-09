@@ -44,6 +44,7 @@
     </div>
     @include('admin.partials.scripts')
 
+    @include('sweetalert::alert')
 
 </body>
 

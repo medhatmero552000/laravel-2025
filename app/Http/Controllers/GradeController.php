@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Grade;
 use App\Http\Requests\StoreGradeRequest;
 use App\Http\Requests\UpdateGradeRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class GradeController extends Controller
 {
@@ -17,19 +18,19 @@ class GradeController extends Controller
     {
         // الحصول على اللغة الحالية
         $currentLanguage = app()->getLocale();
-    
+
         // جلب السجلات مع الترجمة بناءً على اللغة الحالية
-        $grades = Grade::whereHas('translations', function($query) use ($currentLanguage) {
+        $grades = Grade::whereHas('translations', function ($query) use ($currentLanguage) {
             $query->where('locale', $currentLanguage); // تحقق من وجود الترجمة بناءً على اللغة الحالية
         })
-        ->withTranslation() // تحميل الترجمة لجميع اللغات المدعومة
-        ->paginate(config('pagination.count'));
-    
+            ->withTranslation() // تحميل الترجمة لجميع اللغات المدعومة
+            ->paginate(config('pagination.count'));
+
         return view(self::PATH . 'index', compact('grades'));
     }
-    
-    
-    
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -44,17 +45,37 @@ class GradeController extends Controller
      */
     public function store(StoreGradeRequest $request)
     {
-     
-        $data = $request->validated();
-        
-        Grade::create([
-            'name'=>$data['name'],
-            'notes'=>$data['notes']
-        ]);
-     
-        return to_route('admin.grades.index')->with('success', 'تم لإضافة المرحلة بنجاح');
-     
+        try {
+            $data = $request->validated();
+    
+            // التحقق مما إذا كانت المرحلة موجودة مسبقًا في قاعدة البيانات
+            $exists = Grade::whereTranslation('name', $data['name'])->exists();
+
+            
+            if ($exists) {
+                // إرسال رسالة الخطأ عبر التوست
+                Alert::toast('المرحلة موجودة مسبقًا', 'error');
+                return to_route('admin.grades.index');
+            } else {
+                // إضافة البيانات إلى قاعدة البيانات
+                Grade::create([
+                    'name' => $data['name'],
+                    'notes' => $data['notes']
+                ]);
+    
+                // إرسال رسالة النجاح عبر التوست
+                Alert::toast('تمت إضافة المرحلة بنجاح', 'success');
+                return to_route('admin.grades.index');
+            }
+        } catch (\Throwable $th) {
+            // dd($th->getMessage());
+            // إرسال رسالة الخطأ في حالة حدوث مشكلة
+            Alert::toast('حدث خطأ أثناء إضافة المرحلة', 'error');
+            return to_route('admin.grades.index');
+        }
     }
+    
+
 
     /**
      * Display the specified resource.
@@ -79,11 +100,11 @@ class GradeController extends Controller
     {
         $data = $request->validated();
         $grade = Grade::findOrFail($data['id']);
-        
+
         $grade->update([
             'name'  => $data['name'],
             'notes' => $data['notes'],
-        ]);        
+        ]);
         return to_route('admin.grades.index')->with('success', 'Message');
     }
 

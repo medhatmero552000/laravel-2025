@@ -41,5 +41,7 @@
     <!-- End layout styles -->
 
     <link rel="shortcut icon" href="{{ asset('admin-assets') }}/images/favicon.png" />
-	
+	<!-- إضافة سكربت SweetAlert2 -->
+{{-- <script src="{{ asset('vendor/sweetalert2/sweetalert2.all.min.js') }}"></script> --}}
+
 </head>

@@ -1,11 +1,14 @@
 <style>
-    .table td, .table th {
-        padding: 0px 0px; /* تقليل المسافة الداخلية */
-        line-height: 1;  /* تقليل ارتفاع النص داخل الخلايا */
+   .table-compact td,
+    .table-compact th {
+        padding: 1px 3px !important;
+        line-height: 1 !important;
+        font-size: 12px !important;
+        vertical-align: middle !important;
     }
-    .table tr {
-        height: 10px; /* تحديد ارتفاع الصفوف */
-    }
+
+
+
 </style>
 
 @extends('admin.master')
@@ -21,7 +24,7 @@
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">{{ __('keywords.add_new_grade') }}</button>
 
-                            <table class="table p-0 table-striped">
+                                <table class="table table-striped table-compact">
 
                                 <thead>
                                     <tr>
@@ -101,7 +104,7 @@
                                         @endforeach
                                     @else
                                         <tr class="alert table-danger">
-                                            <td colspan="4" class="text-center"> <!-- Update the colspan value -->
+                                            <td colspan="100%" class="text-center"> <!-- Update the colspan value -->
                                                 {{ ucwords(__('keywords.no_data_available')) }}
                                             </td>
                                         </tr>
@@ -126,12 +129,12 @@
                     <div class="modal-content">
 
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">{{ __('keywords.addnewgrade') }}</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">{{ __('keywords.add_new_grade') }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label class="col-form-label">{{ __('keywords.gradename_ar') }}</label>
+                                <label class="col-form-label">{{ __('keywords.add') }}</label>
                                 <input type="text" class="form-control" name="name">
                                 {{--
                                 <label class="col-form-label">{{ __('keywords.gradename_en') }}</label>
@@ -152,24 +155,31 @@
                 </div>
             </div>
         </form>
-
-
-        @if(session('success'))
+        {{-- @if(session('toast'))
         <script>
             Swal.fire({
-                title: 'Success!',
-                text: '{!! session('success') !!}',  // استخدم {!! لحل مشكلة التداخل
-                icon: 'success',
-                confirmButtonText: 'OK'
+                icon: '{{ session('toast')['type'] }}', // تحديد نوع الأيقونة (success, error, etc.)
+                title: '{{ session('toast')['message'] }}', // النص المعروض
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 10000, // مدة عرض الإشعار
+                background: '#90C67C', // تخصيص الخلفية
+                color: '#fff !important', // تخصيص لون النص
+                customClass: {
+                    icon: 'custom-icon', // تخصيص الأيقونة
+                    title: '' // تخصيص النص
+                }
             });
+            
         </script>
-    @endif
-    <script>
-        $(document).ready(function() {
-            setTimeout(function() {
-                $(".alert").fadeOut();
-            }, 5000); // تختفي بعد 5 ثواني
-        });
-    </script>
-    @include('sweetalert::alert')
+        
+        @endif --}}
+        
+        
+    
+ 
+    
+    
+  
     @endsection
