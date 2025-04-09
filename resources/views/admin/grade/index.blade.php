@@ -1,3 +1,13 @@
+<style>
+    .table td, .table th {
+        padding: 0px 0px; /* تقليل المسافة الداخلية */
+        line-height: 1;  /* تقليل ارتفاع النص داخل الخلايا */
+    }
+    .table tr {
+        height: 10px; /* تحديد ارتفاع الصفوف */
+    }
+</style>
+
 @extends('admin.master')
 @section('title', __('keywords.gradeList'))
 @section('pagetitle', __('keywords.addgrade'))
@@ -11,7 +21,7 @@
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">{{ __('keywords.add_new_grade') }}</button>
 
-                            <table class="table table-striped">
+                            <table class="table p-0 table-striped">
 
                                 <thead>
                                     <tr>
@@ -30,21 +40,28 @@
                                                 <td>{{ $grade->name }}</td>
                                                 <td>{{ $grade->notes }}</td>
                                                 <td>{{ $grade->created_at->diffForHumans() }}</td>
-                                                <td>
+                                                <td class="">
+                                                    {{-- Edit Link --}}
                                                     <a href="#" data-bs-toggle="modal"
                                                         data-bs-target="#edit{{ $grade->id }}"
-                                                        class="btn btn-warning btn-sm">{{ __('keywords.edit') }}</a>
-                                                    <form action="#" method="POST" class="d-inline">
+                                                        ><i data-feather="edit"></i></a>
+                                                        {{-- Show link --}}
+                                                    {{-- <a href="#" data-bs-toggle="modal"
+                                                        data-bs-target=""
+                                                        ><i data-feather="eye" class=" text-success"></i></a> --}}
+                                                        {{-- Delete Link --}}
+                                                    <form action="{{ route('admin.grade.destroy',['grade'=>$grade->id]) }}" method="POST" class="d-inline">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm"
-                                                            onclick="return confirm('{{ __('keywords.confirm_delete') }}')">{{ __('keywords.delete') }}</button>
+                                                        <button type="submit" class="btn btn-link text-danger"
+                                                            onclick="return confirm('{{ __('keywords.confirm_delete') }}')"><i data-feather="trash-2"></i></button>
                                                     </form>
                                                 </td>
                                             </tr>
                                             {{-- /* ----------------------------- Edit grades modal ----------------------------- */ --}}
-                                            <form action="{{ route('admin.grade.edit,') }}" method="POST">
+                                            <form action="{{ route('admin.grade.update',['grade'=>$grade->id]) }}" method="POST">
                                                 @csrf
+                                                <input type="hidden" name="id" value="{{ $grade->id }}">
                                                 <div class="modal fade" id="edit{{ $grade->id }}" tabindex="-1"
                                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
@@ -116,7 +133,7 @@
                             <div class="mb-3">
                                 <label class="col-form-label">{{ __('keywords.gradename_ar') }}</label>
                                 <input type="text" class="form-control" name="name">
-                                {{-- 
+                                {{--
                                 <label class="col-form-label">{{ __('keywords.gradename_en') }}</label>
                                 <input type="text" class="form-control" name="name_en"> --}}
                             </div>
@@ -137,6 +154,22 @@
         </form>
 
 
-
-
+        @if(session('success'))
+        <script>
+            Swal.fire({
+                title: 'Success!',
+                text: '{!! session('success') !!}',  // استخدم {!! لحل مشكلة التداخل
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $(".alert").fadeOut();
+            }, 5000); // تختفي بعد 5 ثواني
+        });
+    </script>
+    @include('sweetalert::alert')
     @endsection

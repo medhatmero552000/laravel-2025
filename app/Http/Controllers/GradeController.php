@@ -12,12 +12,24 @@ class GradeController extends Controller
      * Display a listing of the resource.
      */
 
-    private const PATH = "admin.Grade.";
+    private const PATH = "admin.grade.";
     public function index()
     {
-        $grades = Grade::paginate(config('pagenation.count'));
-        return view(self::PATH . 'index', get_defined_vars());
+        // الحصول على اللغة الحالية
+        $currentLanguage = app()->getLocale();
+    
+        // جلب السجلات مع الترجمة بناءً على اللغة الحالية
+        $grades = Grade::whereHas('translations', function($query) use ($currentLanguage) {
+            $query->where('locale', $currentLanguage); // تحقق من وجود الترجمة بناءً على اللغة الحالية
+        })
+        ->withTranslation() // تحميل الترجمة لجميع اللغات المدعومة
+        ->paginate(config('pagination.count'));
+    
+        return view(self::PATH . 'index', compact('grades'));
     }
+    
+    
+    
 
     /**
      * Show the form for creating a new resource.
@@ -39,7 +51,9 @@ class GradeController extends Controller
             'name'=>$data['name'],
             'notes'=>$data['notes']
         ]);
-        return to_route('admin.grades.index')->with('success', 'Message');
+     
+        return to_route('admin.grades.index')->with('success', 'تم لإضافة المرحلة بنجاح');
+     
     }
 
     /**
@@ -64,8 +78,13 @@ class GradeController extends Controller
     public function update(UpdateGradeRequest $request, Grade $grade)
     {
         $data = $request->validated();
-        $grade->update($data);
-        return to_route(self::PATH . 'index')->with('success', 'Message');
+        $grade = Grade::findOrFail($data['id']);
+        
+        $grade->update([
+            'name'  => $data['name'],
+            'notes' => $data['notes'],
+        ]);        
+        return to_route('admin.grades.index')->with('success', 'Message');
     }
 
     /**
@@ -74,6 +93,6 @@ class GradeController extends Controller
     public function destroy(Grade $grade)
     {
         $grade->delete();
-        return to_route(self::PATH . 'index')->with('success', 'Message');
+        return to_route('admin.grades.index')->with('success', 'Message');
     }
 }

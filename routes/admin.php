@@ -15,6 +15,7 @@ Route::prefix(LaravelLocalization::setLocale().'/admin')->middleware( [ 'localeS
         Route::get('/grades', [ControllersGradeController::class, 'index'])->name('grades.index');
         Route::post('grades/store', [ControllersGradeController::class, 'store'])->name('grade.store');
         Route::post('grades/update', [ControllersGradeController::class, 'update'])->name('grade.update');
+        Route::delete('grades/delete/{grade}', [ControllersGradeController::class, 'destroy'])->name('grade.destroy');
     });
 
     require __DIR__.'/Auth.php';

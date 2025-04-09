@@ -12,7 +12,7 @@
             </div>
             <div class="sidebar-body">
               <ul class="nav">
-             
+
                 <x-singletab-component title="main" href="{{route('admin.index')}}" tabname="{{__('keywords.dashboard')}}" icon="box"></x-singletab-component>
 
 
@@ -20,7 +20,7 @@
                 <li class="nav-item nav-category">{{__('keywords.grade_list')}}</li>
                 <li class="nav-item">
                   <a class="nav-link" data-bs-toggle="collapse" href="#emails" role="button" aria-expanded="false" aria-controls="emails">
-                    <i class="link-icon" data-feather="mail"></i>
+                    <i class="link-icon" data-feather="feather"></i>
                     <span class="link-title">{{__('keywords.grade_list')}}</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                   </a>
@@ -29,12 +29,12 @@
                       <li class="nav-item">
                         <a href="{{ route('admin.grades.index') }}" class="nav-link">{{__('keywords.add_new_grade')}}</a>
                       </li>
-                   
+
                     </ul>
                   </div>
                 </li>
-            
-              
+
+
               </ul>
             </div>
           </nav>

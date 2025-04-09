@@ -2,10 +2,10 @@
 <div class="dropdown">
     <a class="nav-link dropdown-toggle " type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
-        <img src="{{ asset('vendor/blade-flags/language-' . LaravelLocalization::getCurrentLocale() . '.svg') }}"
-            width="20" height="20">
-
-        <span class="ms-1 me-1 d-none d-md-inline-block">{{ LaravelLocalization::getCurrentLocaleNative() }}</span>
+{{--        <img src="{{ asset('vendor/blade-flags/language-' . LaravelLocalization::getCurrentLocale() . '.svg') }}"--}}
+{{--            width="20" height="20">--}}
+        <i data-feather="globe"></i>
+{{--        <span class="ms-1 me-1 d-none d-md-inline-block">{{ LaravelLocalization::getCurrentLocaleNative() }}</span>--}}
     </a>
 
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

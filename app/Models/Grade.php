@@ -21,7 +21,7 @@ class Grade extends Model  implements TranslatableContract
     protected $table = 'Grades'; 
 
 # ----------------- THE ATTRIBUTES THAT ARE MASS ASSIGNNABLE ----------------- #
-    protected $guarded = ['id']; 
+    protected $guarded = []; 
 
 
 # -------------------------------- UPLOAD PATH ------------------------------- #
