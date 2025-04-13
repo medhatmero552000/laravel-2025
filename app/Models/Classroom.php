@@ -4,25 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 
-class Grade extends Model  implements TranslatableContract
+class Classroom extends Model implements TranslatableContract
 {
     use HasFactory;
-    // use SoftDeletes;
     use Translatable;
 
-    public $translatedAttributes = ['name', 'notes'];
+    public $translatedAttributes = ['classroom'];
     protected $fillable = [];
 
 
     # -------------------- THE TABLE ASSOCIATED WITH THE MODEL ------------------- #
-    protected $table = 'Grades';
+    protected $table = 'classrooms';
 
     # ----------------- THE ATTRIBUTES THAT ARE MASS ASSIGNNABLE ----------------- #
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
 
     # -------------------------------- UPLOAD PATH ------------------------------- #
@@ -33,9 +32,9 @@ class Grade extends Model  implements TranslatableContract
 
 
 
-    public function grade_calssroom()
+    public function classroom_grade()
     {
-        return $this->hasMany(Classroom::class);
+        return $this->belongsTo(Grade::class);
     }
 }
 

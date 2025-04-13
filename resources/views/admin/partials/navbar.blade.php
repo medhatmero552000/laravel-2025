@@ -4,14 +4,7 @@
         <i data-feather="menu"></i>
     </a>
     <div class="navbar-content">
-        <form class="search-form">
-            <div class="input-group">
-  <div class="input-group-text">
-    <i data-feather="search"></i>
-  </div>
-                <input type="text" class="form-control" id="navbarForm" placeholder="Search here...">
-            </div>
-        </form>
+       
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
               <x-lang-component></x-lang-component>
@@ -209,12 +202,17 @@
           <span>Switch User</span>
         </a>
       </li>
+
       <li class="py-2 dropdown-item">
-        <a href="javascript:;" class="text-body ms-0">
-          <i class="me-2 icon-md" data-feather="log-out"></i>
-          <span>Log Out</span>
-        </a>
-      </li>
+        <form action="{{ route('admin.logout') }} " method="POST" class="d-inline">
+            @csrf <!-- إذا كنت تستخدم Laravel، هذه السطر لإضافة حماية CSRF -->
+            <button type="submit" class="btn btn-link text-body ms-0 dropdown-item">
+                <i class="me-2 icon-md" data-feather="log-out"></i>
+                <span>Log Out</span>
+            </button>
+        </form>
+    </li>
+    
     </ul>
                 </div>
             </li>

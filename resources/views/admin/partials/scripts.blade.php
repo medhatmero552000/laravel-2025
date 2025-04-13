@@ -15,3 +15,6 @@
 <!-- Custom js for this page -->
 <script src="{{asset('admin-assets')}}/js/dashboard-dark.js"></script>
 <!-- End custom js for this page -->
+{{-- <script src="jquery.repeater.js"></script> --}}
+
+<script src="{{asset('admin-assets')}}/js/form_repeater.js"></script>

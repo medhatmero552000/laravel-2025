@@ -1,6 +1,6 @@
 @extends('admin.master')
 @section('title', __('keywords.gradeList'))
-
+@section('pagetitle', __('keywords.add_new_grade'))
 
 @section('content')
     <div class="row">

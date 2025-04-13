@@ -94,19 +94,31 @@ class GradeController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storage.UpdateGradeRequest
      */
     public function update(UpdateGradeRequest $request, Grade $grade)
-    {
+{
+    try {
         $data = $request->validated();
-        $grade = Grade::findOrFail($data['id']);
+
+        // $grade = Grade::findOrFail($data['id']);
 
         $grade->update([
-            'name'  => $data['name'],
+            'name' => $data['name'],
             'notes' => $data['notes'],
         ]);
-        return to_route('admin.grades.index')->with('success', 'Message');
+        Alert::toast('    تم تعديل المرحلة بنجاح', 'success');
+
+        return redirect()->route('admin.grades.index')->with('success', 'تم تحديث الصف بنجاح.');
+    } catch (\Throwable $e) {
+        Alert::toast('حدث خطأ أثناء تعديل المرحلة', 'error');
+
+        return back()->withErrors(['error' => 'حدث خطأ أثناء التحديث']);
     }
+}
+
+
+    
 
     /**
      * Remove the specified resource from storage.

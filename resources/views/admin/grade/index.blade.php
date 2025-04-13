@@ -13,7 +13,7 @@
 
 @extends('admin.master')
 @section('title', __('keywords.gradeList'))
-@section('pagetitle', __('keywords.addgrade'))
+@section('pagetitle', __('keywords.add_new_grade'))
 @section('content')
     <div class="row">
         <div class="col-12 col-xl-12 stretch-card">
@@ -21,9 +21,9 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">{{ __('keywords.add_new_grade') }}</button>
-
+                            <button type="button" class="mb-3 btn btn-primary btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">{{ __('keywords.add_new_grade') }}<i data-feather="plus"></i></button>
+                                
                                 <table class="table table-striped table-compact">
 
                                 <thead>
@@ -62,45 +62,41 @@
                                                 </td>
                                             </tr>
                                             {{-- /* ----------------------------- Edit grades modal ----------------------------- */ --}}
-                                            <form action="{{ route('admin.grade.update',['grade'=>$grade->id]) }}" method="POST">
+                                            <form action="{{ route('admin.grade.update', $grade->id) }}" method="POST">
                                                 @csrf
+                                            @method('PUT')
                                                 <input type="hidden" name="id" value="{{ $grade->id }}">
-                                                <div class="modal fade" id="edit{{ $grade->id }}" tabindex="-1"
-                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            
+                                                <div class="modal fade" id="edit{{ $grade->id }}" tabindex="-1" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
-
+                                            
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">
-                                                                    {{ __('keywords.add_new_grade') }}</h5>
-                                                                <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                <h5 class="modal-title">تعديل الصف</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
                                                             </div>
+                                            
                                                             <div class="modal-body">
                                                                 <div class="mb-3">
-                                                                    <label
-                                                                        class="col-form-label">{{ __('keywords.gradename_ar') }}</label>
-                                                                    <input type="text" class="form-control"
-                                                                        name="name" value="{{ $grade->name }}">
-
-
+                                                                    <label>اسم الصف</label>
+                                                                    <input type="text" name="name" class="form-control" value="{{ $grade->name }}">
                                                                 </div>
+                                            
                                                                 <div class="mb-3">
-                                                                    <label
-                                                                        class="col-form-label">{{ __('keywords.notes_ar') }}</label>
-                                                                    <textarea class="form-control" name="notes">{{ $grade->notes }}</textarea>
-
-
+                                                                    <label>ملاحظات</label>
+                                                                    <textarea name="notes" class="form-control">{{ $grade->notes }}</textarea>
                                                                 </div>
                                                             </div>
+                                            
                                                             <div class="modal-footer">
-                                                                <button type="submit"
-                                                                    class="btn btn-primary">{{ __('keywords.save') }}</button>
+                                                                <button type="submit" class="btn btn-primary">حفظ التعديلات</button>
                                                             </div>
+                                            
                                                         </div>
                                                     </div>
                                                 </div>
                                             </form>
+                                            
                                         @endforeach
                                     @else
                                         <tr class="alert table-danger">
@@ -181,5 +177,14 @@
  
     
     
-  
+        @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    
     @endsection

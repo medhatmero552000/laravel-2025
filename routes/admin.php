@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\Grade\GradeController as GradeController;
 use App\Http\Controllers\GradeController as ControllersGradeController;
 use Illuminate\Support\Facades\Route;
@@ -14,8 +15,11 @@ Route::prefix(LaravelLocalization::setLocale().'/admin')->middleware( [ 'localeS
         /* --------------------------------- Grades --------------------------------- */
         Route::get('/grades', [ControllersGradeController::class, 'index'])->name('grades.index');
         Route::post('grades/store', [ControllersGradeController::class, 'store'])->name('grade.store');
-        Route::post('grades/update', [ControllersGradeController::class, 'update'])->name('grade.update');
+        Route::put('/grades/update/{grade}', [ControllersGradeController::class, 'update'])->name('grade.update');
         Route::delete('grades/delete/{grade}', [ControllersGradeController::class, 'destroy'])->name('grade.destroy');
+        /* -------------------------------- Classroom ------------------------------- */
+        Route::resource('classrooms', ClassroomController::class);
+
     });
 
     require __DIR__.'/Auth.php';
