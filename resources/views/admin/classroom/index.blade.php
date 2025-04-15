@@ -85,7 +85,7 @@
                                         </tr>
 
                                         {{-- مودال تعديل الفصل --}}
-                                        <div class="modal fade" id="editClassroom{{ $classroom->id }}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal fade" id="editClassroom{{ $classroom->id }}" tabindex="-1" aria-labelledby="editClassroomLabel{{ $classroom->id }}" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <form action="{{ route('admin.classrooms.update', $classroom->id) }}" method="POST">
@@ -94,23 +94,21 @@
                                                         <input type="hidden" name="id" value="{{ $classroom->id }}">
                                         
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title">تعديل الفصل</h5>
+                                                            <h5 class="modal-title" id="editClassroomLabel{{ $classroom->id }}">تعديل الفصل</h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
                                                         </div>
                                         
                                                         <div class="modal-body">
                                                             <div class="mb-3">
                                                                 <label>اسم الفصل</label>
-                                                                <input type="text" name="classroom" required class="form-control" value="{{ $classroom->classroom }}">
-
+                                                                <input type="text" name="classroom" class="form-control" value="{{ $classroom->classroom }}" id="classroomName{{ $classroom->id }}" required autofocus>
                                                             </div>
                                         
                                                             <div class="mb-3">
                                                                 <label>الصف الدراسي</label>
                                                                 <select name="grade_id" class="form-control">
                                                                     @foreach ($grades as $grade)
-                                                                        <option value="{{ $grade->id }}"
-                                                                            {{ $classroom->grade_id == $grade->id ? 'selected' : '' }}>
+                                                                        <option value="{{ $grade->id }}" {{ $classroom->grade_id == $grade->id ? 'selected' : '' }}>
                                                                             {{ $grade->name }}
                                                                         </option>
                                                                     @endforeach
@@ -125,6 +123,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                         
                                     @endforeach
                                 @else
@@ -227,4 +226,6 @@
             window.classroom_name = "{{ __('keywords.classroom_name') }}";
             window.remove_row = "{{ __('keywords.remove_row') }}";
         </script>
+      
+        
     @endpush

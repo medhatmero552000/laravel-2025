@@ -9,6 +9,7 @@ use App\Models\Grade;
 // use Illuminate\Console\View\Components\Alert;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
+use Symfony\Component\Console\Helper\ProgressBar;
 
 class ClassroomController extends Controller
 {
@@ -120,12 +121,12 @@ class ClassroomController extends Controller
         $classroom->update($data);
 
         // عرض رسالة النجاح
-        Alert::toast('تم التعديل بنجاح', 'success');
+        Alert::toast('تم التعديل بنجاح', 'success')->position('top-start')->autoClose(3000)->timerProgressBar(3000);
         
         // إعادة التوجيه بعد التعديل
         return redirect()->route('admin.classrooms.index');
     } catch (\Exception $e) {
-        Alert::toast('  خطأ لم يتم التعديل ', 'error');
+        Alert::toast('  خطأ لم يتم التعديل ', 'error')->autoClose(3000)->timerProgressBar(3000);
         // في حالة حدوث خطأ، سيتم إدخال الخطأ هنا
         return redirect()->back()->with('error', 'حدث خطأ أثناء التحديث: ' . $e->getMessage());
     }
