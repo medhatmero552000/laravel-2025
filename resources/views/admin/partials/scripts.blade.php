@@ -78,3 +78,13 @@
         });
     });
 </script>
+{{-- ٍSelectox Lib --}}
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+<script>
+    const element = document.getElementById('grade_id');
+    const choices = new Choices(element, {
+        searchEnabled: true,
+        itemSelectText: '',
+    });
+</script>

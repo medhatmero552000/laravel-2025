@@ -35,6 +35,35 @@
                                 </form>
                             </div>
                         </div>
+                        {{-- فورم عرض المراحل الدراسية --}}
+                        <form method="GET" action="{{ route('admin.classrooms.filter') }}">
+                            <div class="mb-3 col-2">
+                                <label for="grade_id">{{ __('keywords.grade') }}</label>
+                                <select name="grade_id" id="grade_id" class="form-select" onchange="this.form.submit()">
+                                    <option value="" disabled selected>{{ __('keywords.choose') }}</option> <!-- خيار افتراضي -->
+                                    @foreach ($grades as $grade)
+                                        <option value="{{ $grade->id }}" 
+                                                {{ request('grade_id') == (string)$grade->id ? 'selected' : '' }}>
+                                            {{-- عرض الترجمة الخاصة باللغة الحالية فقط --}}
+                                            {{ $grade->translate(app()->getLocale())->name ?? $grade->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </form>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+
 
                         {{-- جدول لعرض البيانات --}}
                         <table class="table table-striped table-compact">
@@ -58,7 +87,7 @@
                                                     class="row-checkbox"></td>
                                             <th scope="row">{{ $classrooms->firstItem() + $loop->index }}</th>
                                             <td>{{ $classroom->classroom }}</td>
-                                            
+
                                             <!-- عرض اسم الصف الدراسي إذا كان موجوداً، وإذا لم يكن موجوداً يتم عرض 'No grade assigned' -->
                                             <td>{{ $classroom->classroom_grade ? $classroom->classroom_grade->name : 'No grade assigned' }}
                                             </td>
@@ -85,46 +114,54 @@
                                         </tr>
 
                                         {{-- مودال تعديل الفصل --}}
-                                        <div class="modal fade" id="editClassroom{{ $classroom->id }}" tabindex="-1" aria-labelledby="editClassroomLabel{{ $classroom->id }}" aria-hidden="true">
+                                        <div class="modal fade" id="editClassroom{{ $classroom->id }}" tabindex="-1"
+                                            aria-labelledby="editClassroomLabel{{ $classroom->id }}" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
-                                                    <form action="{{ route('admin.classrooms.update', $classroom->id) }}" method="POST">
+                                                    <form action="{{ route('admin.classrooms.update', $classroom->id) }}"
+                                                        method="POST">
                                                         @csrf
                                                         @method('PUT')
                                                         <input type="hidden" name="id" value="{{ $classroom->id }}">
-                                        
+
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="editClassroomLabel{{ $classroom->id }}">تعديل الفصل</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+                                                            <h5 class="modal-title"
+                                                                id="editClassroomLabel{{ $classroom->id }}">تعديل الفصل
+                                                            </h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="إغلاق"></button>
                                                         </div>
-                                        
+
                                                         <div class="modal-body">
                                                             <div class="mb-3">
                                                                 <label>اسم الفصل</label>
-                                                                <input type="text" name="classroom" class="form-control" value="{{ $classroom->classroom }}" id="classroomName{{ $classroom->id }}" required autofocus>
+                                                                <input type="text" name="classroom" class="form-control"
+                                                                    value="{{ $classroom->classroom }}"
+                                                                    id="classroomName{{ $classroom->id }}" required
+                                                                    autofocus>
                                                             </div>
-                                        
+
                                                             <div class="mb-3">
                                                                 <label>الصف الدراسي</label>
                                                                 <select name="grade_id" class="form-control">
                                                                     @foreach ($grades as $grade)
-                                                                        <option value="{{ $grade->id }}" {{ $classroom->grade_id == $grade->id ? 'selected' : '' }}>
+                                                                        <option value="{{ $grade->id }}"
+                                                                            {{ $classroom->grade_id == $grade->id ? 'selected' : '' }}>
                                                                             {{ $grade->name }}
                                                                         </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
-                                        
+
                                                         <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-primary">حفظ التعديلات</button>
+                                                            <button type="submit" class="btn btn-primary">حفظ
+                                                                التعديلات</button>
                                                         </div>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
-                                        
-                                        
                                     @endforeach
                                 @else
                                     <tr class="alert table-danger">
@@ -226,6 +263,4 @@
             window.classroom_name = "{{ __('keywords.classroom_name') }}";
             window.remove_row = "{{ __('keywords.remove_row') }}";
         </script>
-      
-        
     @endpush

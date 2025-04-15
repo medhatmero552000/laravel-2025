@@ -2,14 +2,6 @@
 
 return [
 
-    /*
-    |--------------------------------------------------------------------------- 
-    | Keywords Language Lines
-    |--------------------------------------------------------------------------- 
-    | The keywords used in the admin interface in English
-    |
-    */
-
     'index' => 'Home Page',
     'sign in' => 'Sign In',
     'home' => 'Home',
@@ -20,7 +12,7 @@ return [
     'email_address' => 'Email Address',
     'password' => 'Password',
 
-    /* ---------------------------- Services Unit Keywords --------------------------- */
+    /* ------------------ Services ------------------ */
     'components' => 'Components',
     'services' => 'Services',
     'id' => 'ID',
@@ -31,16 +23,16 @@ return [
     'message' => 'Messages',
     'features' => 'Features',
     'actions' => 'Actions',
-    'service_add' => 'Service Added Successfully',
-    'no_data_available' => 'No Data Available',
+    'service_add' => 'Service added successfully',
+    'no_data_available' => 'No data available',
     'add_new_service' => 'Add New Service',
 
-    /* ------------------------------- Login Page ------------------------------- */
-    'stay_logged_in' => 'Remember Me',
-    'let_me_in' => 'Sign In',
+    /* ------------------ Login Page ------------------ */
+    'stay_logged_in' => 'Remember me',
+    'let_me_in' => 'Log In',
     'switch_language' => 'Switch Language',
 
-    /* -------------------------- General Admin Management -------------------------- */
+    /* ------------------ General Admin ------------------ */
     'admin_panel' => 'Admin Panel',
     'management' => 'Management',
     'control_panel' => 'Control Panel',
@@ -58,12 +50,13 @@ return [
     'system_monitoring' => 'System Monitoring',
     'task_management' => 'Task Management',
 
-    /* ----------------------- User and Account Management ----------------------- */
+    /* ------------------ Users & Accounts ------------------ */
     'users' => 'Users',
     'user_management' => 'User Management',
     'add_user' => 'Add User',
     'edit_user' => 'Edit User',
     'delete_user' => 'Delete User',
+    'delete_all' => 'Delete All Rows',
     'user_list' => 'User List',
     'roles' => 'Roles',
     'permissions' => 'Permissions',
@@ -82,7 +75,7 @@ return [
     'user_activity' => 'User Activity',
     'login_attempts' => 'Login Attempts',
 
-    /* --------------------------- Clinic Management --------------------------- */
+    /* ------------------ Clinics ------------------ */
     'appointments' => 'Appointments',
     'appointment_list' => 'Appointment List',
     'new_appointment' => 'New Appointment',
@@ -97,7 +90,7 @@ return [
     'treatment_plans' => 'Treatment Plans',
     'prescriptions' => 'Prescriptions',
 
-    /* --------------------------- Support and Help Center --------------------------- */
+    /* ------------------ Support ------------------ */
     'support' => 'Support',
     'help_center' => 'Help Center',
     'faq' => 'FAQ',
@@ -109,7 +102,7 @@ return [
     'customer_feedback' => 'Customer Feedback',
     'issue_tracking' => 'Issue Tracking',
 
-    /* --------------------------- Document Management --------------------------- */
+    /* ------------------ Documents ------------------ */
     'documents' => 'Documents',
     'upload_document' => 'Upload Document',
     'download_document' => 'Download Document',
@@ -121,7 +114,7 @@ return [
     'file_sharing' => 'File Sharing',
     'secure_storage' => 'Secure Storage',
 
-    /* --------------------------- Invoices and Payments --------------------------- */
+    /* ------------------ Billing ------------------ */
     'invoices' => 'Invoices',
     'invoice_number' => 'Invoice Number',
     'create_invoice' => 'Create Invoice',
@@ -146,21 +139,26 @@ return [
     'billing_statements' => 'Billing Statements',
     'payment_gateway' => 'Payment Gateway',
     'subscription_plans' => 'Subscription Plans',
-    
-    /* --------------------------------- Grades --------------------------------- */
+
+    /* ------------------ Grades ------------------ */
     'gradeList' => 'Grade List',
     'grade' => 'Grade',
     'addgrade' => 'Add New Grade',
+    'gradename' => 'Grade Name',
 
-   /* ---------------------------- Additional Keywords ---------------------------- */
-'edit' => 'Edit',
-'delete' => 'Delete',
-'confirm_delete' => 'Are you sure you want to delete this item?',
-'confirm_delete_title' => 'Confirm Delete',
-'save' => 'Save Data',
-'save_data' => ' Save Data',  // تم إضافة هذه الكلمة هنا
+    /* ------------------ Extra ------------------ */
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'confirm_delete' => 'Are you sure you want to delete this item?',
+    'confirm_delete_title' => 'Confirm Delete',
+    'save' => 'Save',
+    'close' => 'Close',
+    'save_data' => 'Save Data',
+    'gradeselect_option' => 'Select Grade',
+    'classroom_name' => 'Classroom Name',
+    'showall_greads' => 'Show All Grades',
 
-    /* ---------------------------- School Management ---------------------------- */
+    /* ------------------ Schools ------------------ */
     'school_management' => 'School Management',
     'school_list' => 'School List',
     'add_school' => 'Add School',
@@ -168,7 +166,7 @@ return [
     'delete_school' => 'Delete School',
     'school_name' => 'School Name',
     'school_address' => 'School Address',
-    'school_contact' => 'School Contact Details',
+    'school_contact' => 'School Contact Info',
     'school_profile' => 'School Profile',
     'students' => 'Students',
     'teacher_list' => 'Teacher List',
@@ -182,24 +180,29 @@ return [
     'student_enrollment' => 'Student Enrollment',
     'school_fees' => 'School Fees',
     'school_reports' => 'School Reports',
-    'add_class' => 'Add Class',
-    'edit_class' => 'Edit Class',
-    'class_list' => 'Class List',
-    'class_name' => 'Class Name',
-    'class_schedule' => 'Class Schedule',
+    'add_class' => 'Add Classroom',
+    'edit_class' => 'Edit Classroom',
+    'class_list' => 'Classroom List',
+    'class_name' => 'Classroom Name',
+    'class_schedule' => 'Classroom Schedule',
     'assign_teacher' => 'Assign Teacher',
-    'manage_classes' => 'Manage Classes',
+    'manage_classes' => 'Manage Classrooms',
     'school_events' => 'School Events',
     'exam_schedule' => 'Exam Schedule',
     'exam_results' => 'Exam Results',
     'attendance' => 'Attendance',
     'student_attendance' => 'Student Attendance',
     'teacher_attendance' => 'Teacher Attendance',
-    'add_new_grade' => 'Add New Grade Level',
+    'add_new_grade' => 'Add New Grade',
     'grade_list' => 'Grade List',
-    'add_grade' => 'Add Grade Level',
-    'gradeName'=>'Grade Name',
-    'notes'=>'Notes',
-    'created_at'=>'Created At',
+    'add_grade' => 'Add Grade',
+    'gradeName' => 'Grade Name',
+    'notes' => 'Notes',
+    'created_at' => 'Created At',
+    'classroom' => 'Classrooms',
+    'classroom_list' => 'Classroom List',
+    'add_new_classroom' => 'Add New Classroom',
+    'remove_row' => 'Remove Row',
+    'add_row' => 'Add Row',
 
 ];
