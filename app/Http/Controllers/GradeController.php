@@ -125,7 +125,23 @@ class GradeController extends Controller
      */
     public function destroy(Grade $grade)
     {
-        $grade->delete();
-        return to_route('admin.grades.index')->with('success', 'Message');
+        // تحقق من وجود فصول مرتبطة
+        if ($grade->grade_calssroom()->exists()) {
+            Alert::toast('لا يمكن حذف المرحلة نظرًا لوجود صفوف تابعة', 'error');
+            return to_route('admin.grades.index');
+        }
+    
+        try {
+            // حذف الصف المرتبط بالمرحلة
+            $grade->forceDelete();
+    
+            // تنبيه النجاح
+            Alert::toast('تم حذف المرحلة بنجاح', 'success');
+            return to_route('admin.grades.index');
+        } catch (\Throwable $th) {
+            // في حال حدوث خطأ
+            Alert::toast('حدث خطأ أثناء الحذف، الرجاء المحاولة لاحقًا.', 'error');
+            return to_route('admin.grades.index');
+        }
     }
 }

@@ -16,9 +16,18 @@ class ClassroomController extends Controller
     private const PATH = "admin.Classroom.";
     public function index()
     {
-        $classrooms = Classroom::all();
+        // الحصول على اللغة الحالية
+        $currentLanguage = app()->getLocale();
         $grades = Grade::all();
-        $classroom = Classroom::paginate(config('pagenation.count'));
+        // جلب السجلات مع الترجمة بناءً على اللغة الحالية
+        $classrooms = Classroom::whereHas('translations', function ($query) use ($currentLanguage) {
+            $query->where('locale', $currentLanguage);
+        })
+        ->withTranslation()
+        ->latest() // ✅ الترتيب قبل الـ paginate
+        ->paginate(config('pagination.count'));
+    
+        // dd($classrooms);
         return view(self::PATH . 'index', get_defined_vars());
     }
 
@@ -27,7 +36,7 @@ class ClassroomController extends Controller
      */
     public function create()
     {
-        
+
         return view(self::PATH . 'create', get_defined_vars());
     }
 
@@ -36,13 +45,44 @@ class ClassroomController extends Controller
      */
     public function store(StoreClassroomRequest $request)
     {
-        $data = $request->all();
-        dd($data);
-
-        // $data=$request->validated();  is this?no  
-        // Classroom::create($data);
-        // return to_route(self::PATH.'index')->with('success','Message');
+        $data = $request->validated();
+    
+        // التحقق من وجود الصفوف في المدخلات
+        if (!isset($data['inputs']) || empty($data['inputs'])) {
+            return redirect()->back()->with('error', 'يجب إضافة صف واحد على الأقل.');
+        }
+    
+        // التحقق من وجود `Grade` صالح
+        $validGradeIds = Grade::pluck('id')->toArray();
+    
+        foreach ($data['inputs'] as $input) {
+            // التحقق من الحقول المطلوبة
+            if (empty($input['text']) || empty($input['select'])) {
+                return redirect()->back()->with('error', 'يرجى ملء جميع الحقول بشكل صحيح.');
+            }
+    
+            // التحقق من أن الصف الدراسي موجود
+            if (!in_array($input['select'], $validGradeIds)) {
+                return redirect()->back()->with('error', 'الصف الدراسي غير موجود.');
+            }
+    
+            // إنشاء الفصل الدراسي بدون الترجمة
+            $classroom = Classroom::create([
+                'grade_id' => $input['select'],
+            ]);
+    
+            // إضافة الترجمة للحقل `name` بناءً على اللغة الحالية
+            $currentLanguage = app()->getLocale();
+            $classroom->translateOrNew($currentLanguage)->classroom = $input['text'];
+            $classroom->save();
+        }
+    
+        // إعادة التوجيه مع رسالة النجاح
+        return redirect()->route('admin.classrooms.index')->with('success', 'تم إضافة الفصول بنجاح.');
     }
+    
+    
+
 
     /**
      * Display the specified resource.

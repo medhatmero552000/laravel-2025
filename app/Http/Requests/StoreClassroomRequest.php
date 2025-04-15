@@ -19,12 +19,15 @@ class StoreClassroomRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            // 'title'=>'required|string',
+            'inputs' => 'required|array',
+            'inputs.*.text' => 'required|string',
+            'inputs.*.select' => 'required|exists:grades,id',
         ];
     }
+    
        public function attributes()
     {
         return[

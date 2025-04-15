@@ -34,7 +34,7 @@ class Classroom extends Model implements TranslatableContract
 
     public function classroom_grade()
     {
-        return $this->belongsTo(Grade::class);
+        return $this->belongsTo(Grade::class ,'grade_id','id'); 
     }
 }
 
