@@ -19,6 +19,7 @@ Route::prefix(LaravelLocalization::setLocale().'/admin')->middleware( [ 'localeS
         Route::delete('grades/delete/{grade}', [ControllersGradeController::class, 'destroy'])->name('grade.destroy');
         /* -------------------------------- Classroom ------------------------------- */
         Route::resource('classrooms', ClassroomController::class);
+        Route::delete('classroomsDeleteAll', [ClassroomController::class, 'destroyAll'])->name('classrooms.deleteAll');
 
     });
 

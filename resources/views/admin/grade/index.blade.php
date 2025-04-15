@@ -130,14 +130,14 @@
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label class="col-form-label">{{ __('keywords.add') }}</label>
+                                <label class="col-form-label">{{ __('keywords.gradename') }}</label>
                                 <input type="text" class="form-control" name="name">
                                 {{--
                                 <label class="col-form-label">{{ __('keywords.gradename_en') }}</label>
                                 <input type="text" class="form-control" name="name_en"> --}}
                             </div>
                             <div class="mb-3">
-                                <label class="col-form-label">{{ __('keywords.notes_ar') }}</label>
+                                <label class="col-form-label">{{ __('keywords.notes') }}</label>
                                 <textarea class="form-control" name="notes"></textarea>
 
                                 {{-- <label class="col-form-label">{{ __('keywords.notes_en') }}</label>
