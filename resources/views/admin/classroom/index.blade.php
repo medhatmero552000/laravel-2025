@@ -40,9 +40,10 @@
                             <div class="mb-3 col-2">
                                 <label for="grade_id">{{ __('keywords.grade') }}</label>
                                 <select name="grade_id" id="grade_id" class="form-select" onchange="this.form.submit()">
-                                    <option value="" disabled selected>{{ __('keywords.choose') }}</option> <!-- خيار افتراضي -->
+                                    <option value="" disabled selected>{{ __('keywords.grade_choose') }}</option> <!-- خيار افتراضي -->
+                                    <option value="" >{{ __('keywords.showall_greads') }}</option> <!-- خيار افتراضي -->
                                     @foreach ($grades as $grade)
-                                        <option value="{{ $grade->id }}" 
+                                    <option value="{{ $grade->id }}" 
                                                 {{ request('grade_id') == (string)$grade->id ? 'selected' : '' }}>
                                             {{-- عرض الترجمة الخاصة باللغة الحالية فقط --}}
                                             {{ $grade->translate(app()->getLocale())->name ?? $grade->name }}

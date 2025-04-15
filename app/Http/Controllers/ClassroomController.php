@@ -28,7 +28,7 @@ class ClassroomController extends Controller
             $query->where('locale', $currentLanguage);
         })
             ->withTranslation()
-            ->latest() // ✅ الترتيب قبل الـ paginate
+            // ✅ الترتيب قبل الـ paginate
             ->paginate(config('pagination.count'));
 
         // dd($classrooms);
@@ -180,20 +180,21 @@ class ClassroomController extends Controller
             Alert::toast('حدث خطأ أثناء الحذف: ' . $e->getMessage(), 'error');
             return response()->json(['success' => false, 'message' => 'حدث خطأ أثناء الحذف: ' . $e->getMessage()]);
         }
-    }public function filter(Request $request)
+    }
+    public function filter(Request $request)
     {
         $currentLanguage = app()->getLocale(); // الحصول على لغة التطبيق
-        
+    
         // الحصول على القيمة من الـ select
         $grade_id = $request->input('grade_id');
-        
-        // تصفية الصفوف بناءً على `grade_id` واستخدام الترجمة حسب اللغة المحددة
-        $grades = Grade::withTranslation() // تحميل الترجمات
+    
+        // تصفية الدرجات بناءً على اللغة الحالية
+        $grades = Grade::withTranslation()
             ->whereHas('translations', function ($query) use ($currentLanguage) {
                 $query->where('locale', $currentLanguage); // تصفية الترجمة بناءً على اللغة
             })
             ->get();
-        
+    
         // تصفية الصفوف الدراسية بناءً على grade_id إذا تم تحديده
         $classrooms = Classroom::where(function($query) use ($grade_id) {
             if ($grade_id) {
@@ -202,10 +203,18 @@ class ClassroomController extends Controller
         })
         ->withTranslation() // لضمان تحميل الترجمة للصفوف الدراسية
         ->latest()
-        ->paginate(config('pagination.count'));
-        
-        return view(self::PATH . 'index', get_defined_vars());
+        ->paginate(config('pagination.count')); // استخدم paginate بدلاً من get()
+    
+        // إرجاع العرض مع البيانات
+        return view(self::PATH . 'index', compact('grades', 'classrooms', 'currentLanguage'));
     }
+    
+    
+    
+    
+
+    
+    
     
     
     
