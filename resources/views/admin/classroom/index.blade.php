@@ -101,7 +101,7 @@
                                                         <div class="modal-body">
                                                             <div class="mb-3">
                                                                 <label>اسم الفصل</label>
-                                                                <input type="text" name="classroom" class="form-control" value="{{ $classroom->classroom }}">
+                                                                <input type="text" name="classroom" required class="form-control" value="{{ $classroom->classroom }}">
 
                                                             </div>
                                         

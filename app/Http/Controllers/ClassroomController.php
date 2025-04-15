@@ -107,16 +107,30 @@ class ClassroomController extends Controller
      * Update the specified resource in storage.
      */
     public function update(UpdateClassroomRequest $request, Classroom $classroom)
-    {
-        $data = $request->validated(); // لازم تتأكد إن البيانات مش فاضية
-    
-        // dd($data); // تقدر تستخدمه للتجربة
-    
+{
+    try {
+        $data = $request->validated(); // التحقق من البيانات المرسلة
+        
+        // تأكد من أن البيانات غير فارغة قبل التحديث
+        if (empty($data)) {
+            return redirect()->back()->with('error', 'لا توجد بيانات للتحديث.');
+        }
+
+        // التحديث في قاعدة البيانات
         $classroom->update($data);
-    
+
+        // عرض رسالة النجاح
         Alert::toast('تم التعديل بنجاح', 'success');
+        
+        // إعادة التوجيه بعد التعديل
         return redirect()->route('admin.classrooms.index');
+    } catch (\Exception $e) {
+        Alert::toast('  خطأ لم يتم التعديل ', 'error');
+        // في حالة حدوث خطأ، سيتم إدخال الخطأ هنا
+        return redirect()->back()->with('error', 'حدث خطأ أثناء التحديث: ' . $e->getMessage());
     }
+}
+
     
     
 
