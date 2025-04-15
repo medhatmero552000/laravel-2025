@@ -2,6 +2,15 @@
 
 return [
 
+    /*
+    |--------------------------------------------------------------------------
+    | Keywords Language Lines
+    |--------------------------------------------------------------------------
+    | The keywords used in the admin interface in English
+    |
+    */
+
+    /* ---------------------------- Main Interface ---------------------------- */
     'index' => 'Home Page',
     'sign in' => 'Sign In',
     'home' => 'Home',
@@ -12,7 +21,7 @@ return [
     'email_address' => 'Email Address',
     'password' => 'Password',
 
-    /* ------------------ Services ------------------ */
+    /* ---------------------------- Services Section ---------------------------- */
     'components' => 'Components',
     'services' => 'Services',
     'id' => 'ID',
@@ -27,12 +36,12 @@ return [
     'no_data_available' => 'No data available',
     'add_new_service' => 'Add New Service',
 
-    /* ------------------ Login Page ------------------ */
-    'stay_logged_in' => 'Remember me',
+    /* ---------------------------- Sign In Page ---------------------------- */
+    'stay_logged_in' => 'Stay Logged In',
     'let_me_in' => 'Log In',
     'switch_language' => 'Switch Language',
 
-    /* ------------------ General Admin ------------------ */
+    /* ---------------------------- General Admin ---------------------------- */
     'admin_panel' => 'Admin Panel',
     'management' => 'Management',
     'control_panel' => 'Control Panel',
@@ -50,7 +59,7 @@ return [
     'system_monitoring' => 'System Monitoring',
     'task_management' => 'Task Management',
 
-    /* ------------------ Users & Accounts ------------------ */
+    /* ---------------------------- User Management ---------------------------- */
     'users' => 'Users',
     'user_management' => 'User Management',
     'add_user' => 'Add User',
@@ -75,7 +84,7 @@ return [
     'user_activity' => 'User Activity',
     'login_attempts' => 'Login Attempts',
 
-    /* ------------------ Clinics ------------------ */
+    /* ---------------------------- Clinic Management ---------------------------- */
     'appointments' => 'Appointments',
     'appointment_list' => 'Appointment List',
     'new_appointment' => 'New Appointment',
@@ -90,10 +99,10 @@ return [
     'treatment_plans' => 'Treatment Plans',
     'prescriptions' => 'Prescriptions',
 
-    /* ------------------ Support ------------------ */
+    /* ---------------------------- Support and Help Center ---------------------------- */
     'support' => 'Support',
     'help_center' => 'Help Center',
-    'faq' => 'FAQ',
+    'faq' => 'Frequently Asked Questions',
     'contact_support' => 'Contact Support',
     'open_ticket' => 'Open Ticket',
     'ticket_status' => 'Ticket Status',
@@ -102,8 +111,11 @@ return [
     'customer_feedback' => 'Customer Feedback',
     'issue_tracking' => 'Issue Tracking',
 
-    /* ------------------ Documents ------------------ */
+    /* ---------------------------- Document Management ---------------------------- */
     'documents' => 'Documents',
+    'sections' => 'Sections',
+    'sections_list' => 'Sections List',
+    'add_new_section' => 'Add New Section', 
     'upload_document' => 'Upload Document',
     'download_document' => 'Download Document',
     'document_list' => 'Document List',
@@ -114,7 +126,7 @@ return [
     'file_sharing' => 'File Sharing',
     'secure_storage' => 'Secure Storage',
 
-    /* ------------------ Billing ------------------ */
+    /* ---------------------------- Invoices and Payments ---------------------------- */
     'invoices' => 'Invoices',
     'invoice_number' => 'Invoice Number',
     'create_invoice' => 'Create Invoice',
@@ -140,25 +152,26 @@ return [
     'payment_gateway' => 'Payment Gateway',
     'subscription_plans' => 'Subscription Plans',
 
-    /* ------------------ Grades ------------------ */
+    /* ---------------------------- Grades ---------------------------- */
     'gradeList' => 'Grade List',
     'grade' => 'Grade',
     'addgrade' => 'Add New Grade',
     'gradename' => 'Grade Name',
 
-    /* ------------------ Extra ------------------ */
+    /* ---------------------------- Additional Keywords ---------------------------- */
     'edit' => 'Edit',
+    'grade_choose' => 'You must choose a grade',
     'delete' => 'Delete',
     'confirm_delete' => 'Are you sure you want to delete this item?',
-    'confirm_delete_title' => 'Confirm Delete',
-    'save' => 'Save',
+    'confirm_delete_title' => 'Confirm Deletion',
+    'save' => 'Save Data',
     'close' => 'Close',
     'save_data' => 'Save Data',
     'gradeselect_option' => 'Select Grade',
     'classroom_name' => 'Classroom Name',
     'showall_greads' => 'Show All Grades',
 
-    /* ------------------ Schools ------------------ */
+    /* ---------------------------- School Management ---------------------------- */
     'school_management' => 'School Management',
     'school_list' => 'School List',
     'add_school' => 'Add School',
@@ -166,7 +179,7 @@ return [
     'delete_school' => 'Delete School',
     'school_name' => 'School Name',
     'school_address' => 'School Address',
-    'school_contact' => 'School Contact Info',
+    'school_contact' => 'School Contact Details',
     'school_profile' => 'School Profile',
     'students' => 'Students',
     'teacher_list' => 'Teacher List',
@@ -180,13 +193,13 @@ return [
     'student_enrollment' => 'Student Enrollment',
     'school_fees' => 'School Fees',
     'school_reports' => 'School Reports',
-    'add_class' => 'Add Classroom',
-    'edit_class' => 'Edit Classroom',
-    'class_list' => 'Classroom List',
-    'class_name' => 'Classroom Name',
-    'class_schedule' => 'Classroom Schedule',
+    'add_class' => 'Add Class',
+    'edit_class' => 'Edit Class',
+    'class_list' => 'Class List',
+    'class_name' => 'Class Name',
+    'class_schedule' => 'Class Schedule',
     'assign_teacher' => 'Assign Teacher',
-    'manage_classes' => 'Manage Classrooms',
+    'manage_classes' => 'Manage Classes',
     'school_events' => 'School Events',
     'exam_schedule' => 'Exam Schedule',
     'exam_results' => 'Exam Results',
@@ -196,7 +209,6 @@ return [
     'add_new_grade' => 'Add New Grade',
     'grade_list' => 'Grade List',
     'add_grade' => 'Add Grade',
-    'gradeName' => 'Grade Name',
     'notes' => 'Notes',
     'created_at' => 'Created At',
     'classroom' => 'Classrooms',

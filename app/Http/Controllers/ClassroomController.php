@@ -108,32 +108,32 @@ class ClassroomController extends Controller
      * Update the specified resource in storage.
      */
     public function update(UpdateClassroomRequest $request, Classroom $classroom)
-{
-    try {
-        $data = $request->validated(); // التحقق من البيانات المرسلة
-        
-        // تأكد من أن البيانات غير فارغة قبل التحديث
-        if (empty($data)) {
-            return redirect()->back()->with('error', 'لا توجد بيانات للتحديث.');
+    {
+        try {
+            $data = $request->validated(); // التحقق من البيانات المرسلة
+
+            // تأكد من أن البيانات غير فارغة قبل التحديث
+            if (empty($data)) {
+                return redirect()->back()->with('error', 'لا توجد بيانات للتحديث.');
+            }
+
+            // التحديث في قاعدة البيانات
+            $classroom->update($data);
+
+            // عرض رسالة النجاح
+            Alert::toast('تم التعديل بنجاح', 'success')->position('top-start')->autoClose(3000)->timerProgressBar(3000);
+
+            // إعادة التوجيه بعد التعديل
+            return redirect()->route('admin.classrooms.index');
+        } catch (\Exception $e) {
+            Alert::toast('  خطأ لم يتم التعديل ', 'error')->autoClose(3000)->timerProgressBar(3000);
+            // في حالة حدوث خطأ، سيتم إدخال الخطأ هنا
+            return redirect()->back()->with('error', 'حدث خطأ أثناء التحديث: ' . $e->getMessage());
         }
-
-        // التحديث في قاعدة البيانات
-        $classroom->update($data);
-
-        // عرض رسالة النجاح
-        Alert::toast('تم التعديل بنجاح', 'success')->position('top-start')->autoClose(3000)->timerProgressBar(3000);
-        
-        // إعادة التوجيه بعد التعديل
-        return redirect()->route('admin.classrooms.index');
-    } catch (\Exception $e) {
-        Alert::toast('  خطأ لم يتم التعديل ', 'error')->autoClose(3000)->timerProgressBar(3000);
-        // في حالة حدوث خطأ، سيتم إدخال الخطأ هنا
-        return redirect()->back()->with('error', 'حدث خطأ أثناء التحديث: ' . $e->getMessage());
     }
-}
 
-    
-    
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -144,7 +144,6 @@ class ClassroomController extends Controller
         // إذا تم الحذف بنجاح
         Alert::toast('تم حذف الصفوف بنجاح', 'success');
         return redirect()->route('admin.classrooms.index');
-
     }
     public function destroyAll(Request $request)
     {
@@ -184,41 +183,28 @@ class ClassroomController extends Controller
     public function filter(Request $request)
     {
         $currentLanguage = app()->getLocale(); // الحصول على لغة التطبيق
-    
+
         // الحصول على القيمة من الـ select
         $grade_id = $request->input('grade_id');
-    
+
         // تصفية الدرجات بناءً على اللغة الحالية
         $grades = Grade::withTranslation()
             ->whereHas('translations', function ($query) use ($currentLanguage) {
                 $query->where('locale', $currentLanguage); // تصفية الترجمة بناءً على اللغة
             })
             ->get();
-    
+
         // تصفية الصفوف الدراسية بناءً على grade_id إذا تم تحديده
-        $classrooms = Classroom::where(function($query) use ($grade_id) {
+        $classrooms = Classroom::where(function ($query) use ($grade_id) {
             if ($grade_id) {
                 $query->where('grade_id', $grade_id);
             }
         })
-        ->withTranslation() // لضمان تحميل الترجمة للصفوف الدراسية
-        ->latest()
-        ->paginate(config('pagination.count')); // استخدم paginate بدلاً من get()
-    
+            ->withTranslation() // لضمان تحميل الترجمة للصفوف الدراسية
+            ->latest()
+            ->paginate(config('pagination.count')); // استخدم paginate بدلاً من get()
+
         // إرجاع العرض مع البيانات
         return view(self::PATH . 'index', compact('grades', 'classrooms', 'currentLanguage'));
     }
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-
 }

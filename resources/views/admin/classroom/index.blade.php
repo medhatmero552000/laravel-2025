@@ -12,7 +12,7 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-start align-items-center">
                                 <!-- زر إضافة صف جديد -->
-                                <button type="button" class="btn btn-primary btn-sm mb-0" data-bs-toggle="modal"
+                                <button type="button" class="mb-0 btn btn-primary btn-sm" data-bs-toggle="modal"
                                     id="openModalBtn" data-bs-target="#repeaterModal">
                                     {{ __('keywords.add_new_classroom') }} <i data-feather="plus"></i>
                                 </button>
@@ -28,23 +28,25 @@
                                     <input type="hidden" id="selectedIds" name="selectedIds">
 
                                     <!-- زر حذف الصفوف المحددة -->
-                                    <button type="submit" id="deleteAll" class="btn btn-danger mb-0" disabled
+                                    <button type="submit" id="deleteAll" class="mb-0 btn btn-danger" disabled
                                         onclick="return confirm('{{ __('keywords.confirm_delete') }}')">
                                         حذف المحدد <i data-feather="trash-2"></i>
                                     </button>
                                 </form>
                             </div>
                         </div>
+
                         {{-- فورم عرض المراحل الدراسية --}}
-                        <form method="GET" action="{{ route('admin.classrooms.filter') }}">
-                            <div class="mb-3 col-2">
-                                <label for="grade_id">{{ __('keywords.grade') }}</label>
+                       
+                        <form method="GET" action="{{ route('admin.classrooms.filter') }}" >
+                            <div class="mb-3 col-3">
+                                <label for="grade_id">{{ __('keywords.gradename') }}</label>
                                 <select name="grade_id" id="grade_id" class="form-select" onchange="this.form.submit()">
                                     <option value="" disabled selected>{{ __('keywords.grade_choose') }}</option> <!-- خيار افتراضي -->
-                                    <option value="" >{{ __('keywords.showall_greads') }}</option> <!-- خيار افتراضي -->
+                                    <option value="">{{ __('keywords.showall_greads') }}</option> <!-- خيار افتراضي -->
                                     @foreach ($grades as $grade)
-                                    <option value="{{ $grade->id }}" 
-                                                {{ request('grade_id') == (string)$grade->id ? 'selected' : '' }}>
+                                        <option value="{{ $grade->id }}" 
+                                            {{ request('grade_id') == (string)$grade->id ? 'selected' : '' }}>
                                             {{-- عرض الترجمة الخاصة باللغة الحالية فقط --}}
                                             {{ $grade->translate(app()->getLocale())->name ?? $grade->name }}
                                         </option>
@@ -52,27 +54,13 @@
                                 </select>
                             </div>
                         </form>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-
-
+                   
                         {{-- جدول لعرض البيانات --}}
                         <table class="table table-striped table-compact">
 
                             <thead>
                                 <tr>
-                                    <th><input type="checkbox" id="checkAll" class="row-checkbox form-check-input">
-                                    </th>
+                                    <th><input type="checkbox" id="checkAll" class="row-checkbox form-check-input"></th>
                                     <th scope="col">#</th>
                                     <th scope="col">{{ ucwords(__('keywords.classroom')) }}</th>
                                     <th scope="col">{{ ucwords(__('keywords.gradeName')) }}</th>
@@ -90,20 +78,18 @@
                                             <td>{{ $classroom->classroom }}</td>
 
                                             <!-- عرض اسم الصف الدراسي إذا كان موجوداً، وإذا لم يكن موجوداً يتم عرض 'No grade assigned' -->
-                                            <td>{{ $classroom->classroom_grade ? $classroom->classroom_grade->name : 'No grade assigned' }}
-                                            </td>
+                                            <td>{{ $classroom->classroom_grade ? $classroom->classroom_grade->name : 'No grade assigned' }}</td>
 
                                             <td>{{ $classroom->created_at->diffForHumans() }}</td>
 
                                             <td>
                                                 {{-- زر التعديل (يفتح مودال خاص بـ classroom) --}}
-                                                <a href="#" data-bs-toggle="modal"
-                                                    data-bs-target="#editClassroom{{ $classroom->id }}"><i
-                                                        data-feather="edit"></i></a>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#editClassroom{{ $classroom->id }}">
+                                                    <i data-feather="edit"></i>
+                                                </a>
 
                                                 {{-- فورم الحذف (يتم إرسال الطلب لحذف الفصل) --}}
-                                                <form action="{{ route('admin.classrooms.destroy', $classroom->id) }}"
-                                                    method="POST" class="d-inline">
+                                                <form action="{{ route('admin.classrooms.destroy', $classroom->id) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-link text-danger"
@@ -119,27 +105,21 @@
                                             aria-labelledby="editClassroomLabel{{ $classroom->id }}" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
-                                                    <form action="{{ route('admin.classrooms.update', $classroom->id) }}"
-                                                        method="POST">
+                                                    <form action="{{ route('admin.classrooms.update', $classroom->id) }}" method="POST">
                                                         @csrf
                                                         @method('PUT')
                                                         <input type="hidden" name="id" value="{{ $classroom->id }}">
 
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title"
-                                                                id="editClassroomLabel{{ $classroom->id }}">تعديل الفصل
-                                                            </h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="إغلاق"></button>
+                                                            <h5 class="modal-title" id="editClassroomLabel{{ $classroom->id }}">تعديل الفصل</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
                                                         </div>
 
                                                         <div class="modal-body">
                                                             <div class="mb-3">
                                                                 <label>اسم الفصل</label>
                                                                 <input type="text" name="classroom" class="form-control"
-                                                                    value="{{ $classroom->classroom }}"
-                                                                    id="classroomName{{ $classroom->id }}" required
-                                                                    autofocus>
+                                                                    value="{{ $classroom->classroom }}" id="classroomName{{ $classroom->id }}" required autofocus>
                                                             </div>
 
                                                             <div class="mb-3">
@@ -156,8 +136,7 @@
                                                         </div>
 
                                                         <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-primary">حفظ
-                                                                التعديلات</button>
+                                                            <button type="submit" class="btn btn-primary">حفظ التعديلات</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -171,7 +150,6 @@
                                         </td>
                                     </tr>
                                 @endif
-
                             </tbody>
                         </table>
 
@@ -181,10 +159,8 @@
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="repeaterModalLabel">
-                                            {{ __('keywords.add_new_classroom') }}</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                        <h5 class="modal-title" id="repeaterModalLabel">{{ __('keywords.add_new_classroom') }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
 
                                     <form action="{{ route('admin.classrooms.store') }}" method="POST">
@@ -210,22 +186,18 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-md-4 d-flex align-items-center justify-content-center">
-                                                        <button type="button"
-                                                            class="btn btn-danger remove-row">{{ __('keywords.remove_row') }}</button>
+                                                        <button type="button" class="btn btn-danger remove-row">{{ __('keywords.remove_row') }}</button>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="mb-3 text-center">
-                                                <button type="button" id="add-row"
-                                                    class="btn btn-success">{{ __('keywords.add_row') }}</button>
+                                                <button type="button" id="add-row" class="btn btn-success">{{ __('keywords.add_row') }}</button>
                                             </div>
                                         </div>
 
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">{{ __('keywords.close') }}</button>
-                                            <button type="submit"
-                                                class="btn btn-primary btn-sm">{{ __('keywords.submit') }}</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('keywords.close') }}</button>
+                                            <button type="submit" class="btn btn-primary btn-sm">{{ __('keywords.submit') }}</button>
                                         </div>
                                     </form>
                                 </div>
@@ -237,7 +209,6 @@
             </div>
         </div>
     @endsection
-
 
     {{-- For translations --}}
     @push('scripts')
