@@ -41,7 +41,7 @@
               <li class="nav-item">
                   <a class="nav-link" data-bs-toggle="collapse" href="#classroom" role="button" aria-expanded="false"
                       aria-controls="emails">
-                      <i class="link-icon" data-feather="feather"></i>
+                      <i class="link-icon" data-feather="codepen"></i>
                       <span class="link-title">{{ __('keywords.classroom_list') }}</span>
                       <i class="link-arrow" data-feather="chevron-down"></i>
                   </a>
@@ -67,7 +67,7 @@
                   <div class="collapse" id="sections">
                       <ul class="nav sub-menu">
                           <li class="nav-item">
-                              <a href="{{ route('admin.classrooms.index') }}"
+                              <a href="{{ route('admin.Sections.index') }}"
                                   class="nav-link">{{ __('keywords.add_new_section') }}</a>
                           </li>
 

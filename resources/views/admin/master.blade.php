@@ -45,6 +45,7 @@
     @include('admin.partials.scripts')
 
     @include('sweetalert::alert')
+    
     @stack('scripts')
 
 </body>

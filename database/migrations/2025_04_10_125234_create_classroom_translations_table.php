@@ -16,8 +16,7 @@ return new class extends Migration
             $table->integer('classroom_id')->unsigned();
             $table->string('locale')->index();
             $table->string('classroom')->required()->unique();
-            // $table->text('notes')->nullable();
-        
+            // $table->text('notes')->nullable();        
             $table->unique(['classroom_id', 'locale']);
             $table->foreign('classroom_id')->references('id')->on('classrooms')->onDelete('cascade')->onDelete('cascade');  
         });

@@ -37,6 +37,10 @@ class Grade extends Model  implements TranslatableContract
     {
         return $this->hasMany(Classroom::class,'grade_id', 'id');
     }
+    public function sections()
+    {
+        return $this->hasMany(Section::class,'grade_id', 'id');
+    }
 }
 
 

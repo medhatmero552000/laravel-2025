@@ -2,4 +2,4 @@
 
 Database Tables
 
-- Settinge []
+- Setting []

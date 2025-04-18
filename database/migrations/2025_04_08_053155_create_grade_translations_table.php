@@ -16,8 +16,7 @@ return new class extends Migration
             $table->integer('grade_id')->unsigned();
             $table->string('locale')->index();
             $table->string('name')->required()->unique();
-            $table->text('notes')->nullable();
-        
+            $table->text('notes')->nullable();        
             $table->unique(['grade_id', 'locale']);
             $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade');
         });

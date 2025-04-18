@@ -36,6 +36,10 @@ class Classroom extends Model implements TranslatableContract
     {
         return $this->belongsTo(Grade::class ,'grade_id','id'); 
     }
+    public function classroom_section()
+    {
+        return $this->hasMany(Section::class ,'classroom_id','id'); 
+    }
 }
 
 

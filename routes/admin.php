@@ -5,6 +5,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\Grade\GradeController as GradeController;
 use App\Http\Controllers\GradeController as ControllersGradeController;
+use App\Http\Controllers\SectionController;
+use App\Models\Section;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -21,6 +23,9 @@ Route::prefix(LaravelLocalization::setLocale().'/admin')->middleware( [ 'localeS
         Route::resource('classrooms', ClassroomController::class);
         Route::delete('classroomsDeleteAll', [ClassroomController::class, 'destroyAll'])->name('classrooms.deleteAll');
         Route::get('classroomsfilter', [ClassroomController::class, 'filter'])->name('classrooms.filter');
+        /* -------------------------------- Sections ------------------------------- */
+        Route::resource('Sections', SectionController::class);
+      
 
     });
 
