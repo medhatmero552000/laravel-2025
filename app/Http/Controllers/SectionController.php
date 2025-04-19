@@ -34,8 +34,9 @@ class SectionController extends Controller
      */
     public function store(Request $request)
     {
-        $data=$request->validated();    
-        Section::create($data);
+        // $data=$request->validated();    
+        // dd($request);
+        Section::create($request);
         return to_route(self::PATH.'index')->with('success','Message');
     }
 

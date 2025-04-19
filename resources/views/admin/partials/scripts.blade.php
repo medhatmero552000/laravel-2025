@@ -88,3 +88,4 @@
         itemSelectText: '',
     });
 </script>
+<script src="{{ asset('admin-assets/js/form_repeater_sections.js') }}"></script>
